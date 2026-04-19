@@ -18,16 +18,14 @@ const ContactUs = ({ darkMode = false }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState({ type: "", message: "" });
 
-  // API URL - handles trailing slash in env variable
+  // ✅ USE ENVIRONMENT VARIABLES - NOT HARDCODED
   const API_URL = `${process.env.REACT_APP_API_URL?.replace(/\/$/, '')}/api/contact/send-mail`;
 
-  // Your WhatsApp number (with country code, no + or spaces)
-  const WHATSAPP_NUMBER = "918279922559";
-  const YOUR_LOCATION = {
-    lat: 28.4595,
-    lng: 77.0266,
-    address: "Gurgaon, Haryana, India"
-  };
+  // ✅ USE ENVIRONMENT VARIABLE
+  const WHATSAPP_NUMBER = process.env.REACT_APP_WHATSAPP_NUMBER || "918279922559";
+  
+  // ✅ USE ENVIRONMENT VARIABLE
+  const EMAIL_USER = process.env.REACT_APP_EMAIL_USER || "tarun.panwar182@gmail.com";
 
   // Get user's live location
   useEffect(() => {
@@ -140,6 +138,12 @@ const ContactUs = ({ darkMode = false }) => {
 
   // Open Google Maps with directions
   const openDirections = () => {
+    // ✅ FIXED: Use separate variables instead of object shorthand
+    const lat = parseFloat(process.env.REACT_APP_LOCATION_LAT) || 28.4595;
+    const lng = parseFloat(process.env.REACT_APP_LOCATION_LNG) || 77.0266;
+    const address = process.env.REACT_APP_LOCATION_ADDRESS || "Gurgaon, Haryana, India";
+    
+    const YOUR_LOCATION = { lat, lng, address };
     const url = `https://www.google.com/maps/dir/?api=1&destination=${YOUR_LOCATION.lat},${YOUR_LOCATION.lng}`;
     window.open(url, "_blank");
   };
@@ -189,7 +193,7 @@ const ContactUs = ({ darkMode = false }) => {
             <span className="title-line highlight">Together</span>
           </h2>
           <p className="contact-subtitle">
-            Have a project in mind? Send me a message and let's create something amazing!
+            Have a Project in mind? Send me a message and let's create something amazing!
           </p>
         </div>
 
@@ -207,7 +211,8 @@ const ContactUs = ({ darkMode = false }) => {
             <span className="action-icon">📍</span>
             <div className="action-text">
               <strong>Get Directions</strong>
-              <small>{YOUR_LOCATION.address}</small>
+              {/* ✅ USE ENVIRONMENT VARIABLE */}
+              <small>{process.env.REACT_APP_LOCATION_ADDRESS || "Gurgaon, Haryana, India"}</small>
             </div>
           </button>
         </div>
@@ -217,7 +222,7 @@ const ContactUs = ({ darkMode = false }) => {
           <div className={`distance-badge ${isVisible ? "animate-in" : ""}`}>
             <span className="pulse-dot"></span>
             <p>
-              You're approximately {calculateDistance(userLocation.lat, userLocation.lng, YOUR_LOCATION.lat, YOUR_LOCATION.lng)} km away
+              You're approximately {calculateDistance(userLocation.lat, userLocation.lng, parseFloat(process.env.REACT_APP_LOCATION_LAT || 28.4595), parseFloat(process.env.REACT_APP_LOCATION_LNG || 77.0266))} km away
             </p>
           </div>
         )}
@@ -230,7 +235,7 @@ const ContactUs = ({ darkMode = false }) => {
               { 
                 icon: "💬", 
                 title: "WhatsApp", 
-                value: "+91 8279922559", 
+                value: `+${process.env.REACT_APP_WHATSAPP_NUMBER || "91 8279922559"}`, 
                 action: () => openWhatsApp(),
                 actionText: "Message Now →",
                 highlight: true
@@ -238,24 +243,24 @@ const ContactUs = ({ darkMode = false }) => {
               { 
                 icon: "📧", 
                 title: "Email", 
-                value: process.env.REACT_APP_EMAIL || "tarun.panwar182@gmail.com", 
-                link: "mailto:tarun.panwar182@gmail.com", 
+                value: process.env.REACT_APP_EMAIL_USER || "tarun.panwar182@gmail.com", 
+                link: `mailto:${process.env.REACT_APP_EMAIL_USER || "tarun.panwar182@gmail.com"}`, 
                 linkText: "Send Email →" 
               },
               { 
                 icon: "📱", 
                 title: "Phone", 
-                value: "+91 8279922559", 
-                link: "tel:+918279922559", 
+                value: `+${process.env.REACT_APP_WHATSAPP_NUMBER || "91 8279922559"}`, 
+                link: `tel:+${process.env.REACT_APP_WHATSAPP_NUMBER || "918279922559"}`, 
                 linkText: "Call Now →" 
               },
               { 
                 icon: "📍", 
                 title: "Location", 
-                value: "Gurgaon, India", 
+                value: process.env.REACT_APP_LOCATION_ADDRESS || "Gurgaon, India", 
                 action: openDirections,
                 actionText: "Get Directions →",
-                subtext: userLocation ? `${calculateDistance(userLocation.lat, userLocation.lng, YOUR_LOCATION.lat, YOUR_LOCATION.lng)} km away` : "Available Worldwide"
+                subtext: userLocation ? `${calculateDistance(userLocation.lat, userLocation.lng, parseFloat(process.env.REACT_APP_LOCATION_LAT || 28.4595), parseFloat(process.env.REACT_APP_LOCATION_LNG || 77.0266))} km away` : "Available Worldwide"
               }
             ].map((item, index) => (
               <div 
@@ -394,7 +399,7 @@ const ContactUs = ({ darkMode = false }) => {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
-          <button onClick={openDirections} className="map-overlay-btn">
+          <button onClick={openDirections} className="Map-overlay-btn">
             <span>🚀</span> Get Directions to Meet Me
           </button>
         </div>
