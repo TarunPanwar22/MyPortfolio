@@ -1,0 +1,150 @@
+.experience-section {
+  width: 100%;
+  /* background-color: var(--section-bg); */
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.full-width-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+  padding: 0 20px;
+}
+.experience-summary {
+  font-size: 1.1rem; /* You can increase this further if needed */
+  line-height: 1.6;
+  color: var(--text); /* Optional, for consistency */
+  margin-bottom: 20px; /* Optional spacing */
+}
+
+.section-title {
+  font-size: 2.4rem;
+  margin-bottom: 50px;
+  color: var(--text);
+}
+
+.experience-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.experience-card {
+  width: 100%;
+  max-width: 500px;
+  background: var(--card-bg);
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+.experience-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+}
+
+.exp-content h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--text);
+}
+
+.exp-content h4 {
+  margin: 5px 0;
+  font-size: 1.1rem;
+  color: var(--sub-text);
+}
+
+.duration {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--period-text);
+  margin: 6px 0 10px;
+}
+
+.about {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.tech-title {
+  font-weight: 600;
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: var(--sub-text);
+}
+
+.tech-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tech-list li {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .experience-card {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .exp-content h3 {
+    font-size: 1.15rem;
+  }
+
+  .exp-content h4,
+  .about,
+  .duration,
+  .tech-title,
+  .tech-list li {
+    font-size: 0.9rem;
+  }
+}
+
+:root {
+  --section-bg: #f9f9f9;
+  --card-bg: #ffffff;
+  --text: #222;
+  --sub-text: #555;
+  --period-text: #777;
+  --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+body.dark {
+  --section-bg: #0d0d0d;
+  --card-bg: #1c1c2b;
+  --text: #eee;
+  --sub-text: #bbb;
+  --period-text: #999;
+  --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* .experience-summary {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  font-size: 1rem;
+  color: var(--sub-text);
+  line-height: 1.6;
+} */
