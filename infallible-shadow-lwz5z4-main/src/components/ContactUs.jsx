@@ -238,7 +238,7 @@ const ContactUs = ({ darkMode = false }) => {
               { 
                 icon: "📧", 
                 title: "Email", 
-                value: "tarun.panwar182@gmail.com", 
+                value: process.env.REACT_APP_EMAIL || "tarun.panwar182@gmail.com", 
                 link: "mailto:tarun.panwar182@gmail.com", 
                 linkText: "Send Email →" 
               },
