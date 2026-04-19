@@ -1,0 +1,12 @@
+[build]
+base = "infallible-shadow-lwz5z4-main"
+command = "npm install && npm run build"
+publish = "infallible-shadow-lwz5z4-main/build"
+
+[build.environment]
+CI = "false"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
