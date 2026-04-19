@@ -4,9 +4,7 @@
   publish = "infallible-shadow-lwz5z4-main/build"
 
 [build.environment]
-  NODE_ENV = "production"
   CI = "false"
-  SECRETS_SCAN_ENABLED = "false"
 
 [[redirects]]
   from = "/*"
